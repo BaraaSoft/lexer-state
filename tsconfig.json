@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "ES6",
+    "module": "commonjs",
+    "declaration": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "./src",
+    "outDir": "./dist"
+  }
+  // "files": [],
+  // "references": [
+  //   {
+  //     "path": "./packages/machine"
+  //   },
+  //   {
+  //     "path": "./packages/examples/arithmetic-lexer-example"
+  //   }
+  // ]
+}
