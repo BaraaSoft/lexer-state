@@ -17,9 +17,16 @@
     "build": "yarn run tsc --build",
     "build:watch": "yarn run tsc --watch"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@types/react-relay": "^14.1.2",
+    "@types/relay-runtime": "^14.1.5",
+    "relay-compiler": "^15.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "graphql": "^16.6.0",
+    "react-relay": "^14.1.0",
+    "relay-runtime": "^14.1.0"
   }
 }

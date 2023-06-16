@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist", // where to put the TS files
-    "target": "ES6",
+    "target": "ES2017",
     "moduleResolution": "node",
     "sourceMap": true,
     "declaration": true,

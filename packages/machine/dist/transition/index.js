@@ -29,7 +29,6 @@ class Transition {
                 __lexemToState.toStates.tokenClass,
             ]),
         ];
-        console.log(this.table);
         return this;
     }
     at(originState) {
