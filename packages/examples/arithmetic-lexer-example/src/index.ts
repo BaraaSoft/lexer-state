@@ -39,8 +39,6 @@ transition
     isItMatch(operatorState).moveTo(operatorState),
   );
 // machine.next(input())
-const stateMachine = new Machine(transition)
-  .from(new RelayStore())
-  .at('EPSILON');
+const stateMachine = new Machine(transition).at('EPSILON');
 console.log(stateMachine.next('10'));
 console.log(stateMachine.next('='));
