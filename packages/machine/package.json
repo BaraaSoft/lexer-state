@@ -4,7 +4,6 @@
   "description": "light weight state machine library written in typescript",
   "author": "Baraa Abuzaid",
   "license": "MIT",
-  "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "files": [
@@ -14,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "yarn tsc --watch --preserveWatchOutput",
     "start": "node ./dist/test.js",
-    "build": "yarn run tsc --build",
+    "build": "yarn run tsc",
     "build:watch": "yarn run tsc --watch"
   },
   "devDependencies": {
@@ -27,6 +26,8 @@
   "dependencies": {
     "graphql": "^16.6.0",
     "react-relay": "^14.1.0",
-    "relay-runtime": "^14.1.0"
+    "relay-runtime": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

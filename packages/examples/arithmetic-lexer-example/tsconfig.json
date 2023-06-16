@@ -5,8 +5,9 @@
     "target": "ES6",
     "moduleResolution": "node",
     "module": "CommonJS",
-    "composite": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "composite": false,
+    "incremental": false
   },
   "include": ["src"] // which files to compile,
 }
