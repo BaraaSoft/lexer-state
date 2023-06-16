@@ -6,3 +6,5 @@ export interface ILexerStore {
   ): void;
   retrieveState(tableName: string): string;
 }
+
+export * from './relayStore';

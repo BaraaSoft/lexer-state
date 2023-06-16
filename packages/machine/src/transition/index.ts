@@ -40,6 +40,7 @@ export interface ITransition<U extends ILexem, T> {
         [U['matchers'], U['tokenClass']][]
       >
     | Record<string, never>;
+  dataTypeName: string;
 }
 
 export class Transition<
@@ -47,7 +48,8 @@ export class Transition<
   T extends ReturnType<typeof isItMatch>,
 > implements ITransition<U, T>
 {
-  constructor(public table = {}) {}
+  table: ITransition<U, T>['table'] = {};
+  constructor(public readonly dataTypeName: string) {}
   private atSate: U[] = [];
 
   public add(...fromToState: ReturnType<T['moveTo']>[]) {
