@@ -12,7 +12,6 @@ import {
   Transition,
   isItMatch,
 } from '@lexer-state/machine';
-import { RelayStore } from '@lexer-state/machine/dist/store';
 
 const transition = new Transition('arithmetic');
 // State Events. Will correspond to an actual state in the machine (State + Event)
