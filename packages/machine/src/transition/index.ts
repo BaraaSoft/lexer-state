@@ -15,7 +15,7 @@ export interface IsItMatchType<
 > {
   moveTo(toState: ILexem): IsItMatchType<T>;
   __lexemToState: T;
-  do: (callback: AsyncFunction<any>) => void;
+  do: (callback: AsyncFunction<any>) => IsItMatchType<T>;
 }
 
 export const isItMatch = <E, T extends ILexem>(
@@ -31,7 +31,9 @@ export const isItMatch = <E, T extends ILexem>(
       return this;
     },
     __lexemToState: lexemToState,
-    do(callback: AsyncFunction<E>) {},
+    do(callback: AsyncFunction<E>) {
+      return this;
+    },
   };
 };
 export interface ITransition<U extends ILexem, T> {
