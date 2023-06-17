@@ -1,9 +1,4 @@
 import { ILexem } from '../lexem';
-import {
-  TokenClassType,
-  TokenKey,
-  TokenType,
-} from '../lexem/token';
 
 type AsyncFunction<E> = (...args: any[]) => Promise<void>;
 export interface LexemToStateType<T extends ILexem> {
