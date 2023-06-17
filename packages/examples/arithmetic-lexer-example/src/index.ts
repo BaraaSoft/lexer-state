@@ -33,7 +33,9 @@ transition
   .at(symbolState)
   .add(
     isItMatch(alphanumericEvent).moveTo(symbolState),
-    isItMatch(eqlState).moveTo(eqlState),
+    isItMatch(eqlState)
+      .moveTo(eqlState)
+      .do(async (arg) => console.log('>> eqlState', arg)),
     isItMatch(parenState).moveTo(parenState),
     isItMatch(charEvent).moveTo(symbolState),
     isItMatch(operatorState).moveTo(operatorState),

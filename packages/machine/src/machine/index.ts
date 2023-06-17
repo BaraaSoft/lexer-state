@@ -40,7 +40,10 @@ export class Machine<
     ].find(([regex]) => regex.test(inputValue));
     if (!nextState) throw new StateError();
     this.currentState = nextState;
-    callback.call(this, this.currentState);
+    if (callback) {
+      callback?.call(null, nextState);
+    }
+
     return nextState;
   }
   save(data: E): IMachine<E, S, T> {

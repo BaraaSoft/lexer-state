@@ -9,6 +9,7 @@ type AsyncFunction<E> = (...args: any[]) => Promise<void>;
 export interface LexemToStateType<T extends ILexem> {
   lexem: T;
   toStates: T;
+  callback?: AsyncFunction<any>;
 }
 export interface IsItMatchType<
   T extends LexemToStateType<ILexem>,
@@ -24,6 +25,7 @@ export const isItMatch = <E, T extends ILexem>(
   let lexemToState: LexemToStateType<T> = {
     lexem,
     toStates: null,
+    callback: null,
   };
   return {
     moveTo(toState: T) {
@@ -31,7 +33,8 @@ export const isItMatch = <E, T extends ILexem>(
       return this;
     },
     __lexemToState: lexemToState,
-    do(callback: AsyncFunction<E>) {
+    do(cb: AsyncFunction<E>, ...args: any[]) {
+      lexemToState.callback = cb;
       return this;
     },
   };
@@ -65,13 +68,11 @@ export class Transition<
     const orgState = this.atSate.pop();
     this.table[orgState.tokenClass] = [
       ...this.table[orgState.tokenClass],
-      ...fromToState.map(
-        ({ __lexemToState, do: callback }) => [
-          __lexemToState.lexem.matchers,
-          __lexemToState.toStates.tokenClass,
-          callback,
-        ],
-      ),
+      ...fromToState.map(({ __lexemToState }) => [
+        __lexemToState.lexem.matchers,
+        __lexemToState.toStates.tokenClass,
+        __lexemToState.callback,
+      ]),
     ];
 
     return this;
