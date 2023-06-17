@@ -35,11 +35,12 @@ export class Machine<
     return this;
   }
   next(inputValue: S): ILexem['tokenClass'] {
-    const [, nextState] = this.transition.table[
+    const [, nextState, callback] = this.transition.table[
       this.currentState
     ].find(([regex]) => regex.test(inputValue));
     if (!nextState) throw new StateError();
     this.currentState = nextState;
+    callback.call(this, this.currentState);
     return nextState;
   }
   save(data: E): IMachine<E, S, T> {

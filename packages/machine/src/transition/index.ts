@@ -5,6 +5,7 @@ import {
   TokenType,
 } from '../lexem/token';
 
+type AsyncFunction<E> = (...args: any[]) => Promise<void>;
 export interface LexemToStateType<T extends ILexem> {
   lexem: T;
   toStates: T;
@@ -14,9 +15,10 @@ export interface IsItMatchType<
 > {
   moveTo(toState: ILexem): IsItMatchType<T>;
   __lexemToState: T;
+  do: (callback: AsyncFunction<any>) => void;
 }
 
-export const isItMatch = <T extends ILexem>(
+export const isItMatch = <E, T extends ILexem>(
   lexem: T,
 ): IsItMatchType<LexemToStateType<T>> => {
   let lexemToState: LexemToStateType<T> = {
@@ -29,6 +31,7 @@ export const isItMatch = <T extends ILexem>(
       return this;
     },
     __lexemToState: lexemToState,
+    do(callback: AsyncFunction<E>) {},
   };
 };
 export interface ITransition<U extends ILexem, T> {
@@ -37,7 +40,11 @@ export interface ITransition<U extends ILexem, T> {
   table:
     | Record<
         U['tokenClass'],
-        [U['matchers'], U['tokenClass']][]
+        [
+          U['matchers'],
+          U['tokenClass'],
+          ReturnType<typeof isItMatch>['do'],
+        ][]
       >
     | Record<string, never>;
   dataTypeName: string;
@@ -56,10 +63,13 @@ export class Transition<
     const orgState = this.atSate.pop();
     this.table[orgState.tokenClass] = [
       ...this.table[orgState.tokenClass],
-      ...fromToState.map(({ __lexemToState }) => [
-        __lexemToState.lexem.matchers,
-        __lexemToState.toStates.tokenClass,
-      ]),
+      ...fromToState.map(
+        ({ __lexemToState, do: callback }) => [
+          __lexemToState.lexem.matchers,
+          __lexemToState.toStates.tokenClass,
+          callback,
+        ],
+      ),
     ];
 
     return this;
