@@ -13,7 +13,6 @@ import {
   isItMatch,
 } from '@lexer-state/machine';
 
-const transition = new Transition('arithmetic');
 // State Events. Will correspond to an actual state in the machine (State + Event)
 const epsilonState = new EpsilonState();
 const intState = new IntState(/0-9/);
@@ -27,6 +26,8 @@ const eqlState = new EqlState(/[=]/);
 const alphanumericEvent = new GenericEvent(/[a-z0-9]/);
 const dotEvent = new GenericEvent(/[.]/);
 const charEvent = new GenericEvent(/[\s*]/);
+
+const transition = new Transition('arithmetic');
 transition
   .at(epsilonState)
   .add(isItMatch(alphanumericEvent).moveTo(symbolState))
