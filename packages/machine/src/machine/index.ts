@@ -48,7 +48,7 @@ export class Machine<
   }
   save(data: E): IMachine<E, S, T> {
     const name = this.transition.dataTypeName;
-    this.save(data);
+    this.store?.add(name, data);
     return this;
   }
 }
