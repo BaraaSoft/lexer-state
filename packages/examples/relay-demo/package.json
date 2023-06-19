@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "tsc": "tsc",
+    "build:copy": "cp -r dist ../examples/relay-demo/lexer-state/",
     "prettier": "prettier . --write",
+    "tsc": "tsc",
     "lint": "eslint .",
     "print-schema": "node ./server/printSchema.mjs > ./server/schema.graphql",
     "relay": "relay-compiler",
