@@ -1,6 +1,6 @@
 {
   "name": "@lexer-state/arithmetic-lexer",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "simple arithmetic lexer based on lexer state library written in typescript",
   "author": "Baraa Abuzaid",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "build": "yarn run tsc"
   },
   "dependencies": {
-    "@lexer-state/machine": "1.0.0"
+    "@lexer-state/machine": "^1.0.0-alpha.0"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",
