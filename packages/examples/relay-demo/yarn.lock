@@ -464,7 +464,7 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@lexer-state/machine@file:./lexer-state/dist":
+"@lexer-state/machine@file:./lexer-state":
   version "0.0.0"
 
 "@n1ru4l/push-pull-async-iterable-iterator@^3.1.0":
