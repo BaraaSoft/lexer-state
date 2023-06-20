@@ -2,8 +2,7 @@
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "version": "1.0.0-alpha.0",
   "packages": [
-    "packages/machine",
-    "packages/examples/arithmetic-lexer-example"
+    "packages/machine"
   ],
   "npmClient": "yarn"
 }
