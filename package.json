@@ -12,8 +12,7 @@
     "version:no-private": "yarn lerna version --no-private"
   },
   "workspaces": [
-    "packages/machine",
-    "packages/examples/arithmetic-lexer-example"
+    "packages/machine"
   ],
   "devDependencies": {
     "lerna": "^7.0.0"
