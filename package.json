@@ -9,7 +9,7 @@
   "packageManager": "yarn@3.2.0",
   "scripts": {
     "build": "yarn lerna run build",
-    "version": "yarn lerna version --no-private"
+    "version:no-private": "yarn lerna version --no-private"
   },
   "workspaces": [
     "packages/machine",
