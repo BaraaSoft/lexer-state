@@ -1,6 +1,6 @@
 {
   "name": "@lexer-state/machine",
-  "version": "1.0.1",
+  "version": "1.0.0-alpha.3",
   "description": "light weight state machine library written in typescript",
   "author": "Baraa Abuzaid",
   "license": "MIT",
