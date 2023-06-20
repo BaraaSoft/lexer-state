@@ -2,3 +2,4 @@ node_modules
 dist/
 .token
 .DS_Store
+.DS_Store/
