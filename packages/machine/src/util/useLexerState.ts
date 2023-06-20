@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { IMachine } from '../machine';
 
+
+ // Todo: use context
 export const useLexerState = <
   Events,
   T extends IMachine<any, any, any> = any,
