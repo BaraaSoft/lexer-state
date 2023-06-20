@@ -1,0 +1,25 @@
+type Order {
+  id: ID
+  firstname: String
+  lastname: String
+  billingAddress: String
+  paymentMethod: String
+  shippingAddress: String
+}
+
+#----------Machine---------#
+interface MachineNode {
+  id: ID
+  state: String
+}
+extend type Query {
+  machine: Machine
+}
+
+type Machine {
+  id: ID
+}
+
+extend type Machine {
+  orders: [Order]
+}
