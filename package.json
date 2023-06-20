@@ -5,7 +5,7 @@
   "main": "index.ts",
   "author": "Baraa Abuzaid",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "packageManager": "yarn@3.2.0",
   "scripts": {
     "build": "yarn lerna run build",
