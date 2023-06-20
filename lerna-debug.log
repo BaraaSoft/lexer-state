@@ -7,31 +7,31 @@
 1 notice cli v7.0.2
 2 verbose packageConfigs Explicit "packages" configuration found in lerna.json. Resolving packages using the configured glob(s): ["packages/machine"]
 3 verbose rootPath /Users/baraa/Devzone/wild-code/lexer-state
-4 verbose session 7870e0ec09ac03c2
+4 verbose session c9d301834d04daa4
 5 verbose user-agent lerna/7.0.2/node@v20.2.0+arm64 (darwin)
 6 warn Yarn's registry proxy is broken, replacing with public npm registry
 7 warn If you don't have an npm token, you should exit and run `npm login`
 8 silly argv { _: [ 'publish' ], composed: 'publish', lernaVersion: '7.0.2' }
 9 verbose packageConfigs Explicit "packages" configuration found in lerna.json. Resolving packages using the configured glob(s): ["packages/machine"]
 10 verbose rootPath /Users/baraa/Devzone/wild-code/lexer-state
-11 info current version 1.0.0-alpha.3
+11 info current version 1.0.1
 12 silly isAnythingCommitted
 13 verbose isAnythingCommitted 1
 14 silly getCurrentBranch
 15 verbose currentBranch master
 16 silly remoteBranchExists
 17 silly isBehindUpstream
-18 silly isBehindUpstream master is behind origin/master by 0 commit(s) and ahead by 0
+18 silly isBehindUpstream master is behind origin/master by 0 commit(s) and ahead by 1
 19 silly hasTags
 20 verbose hasTags true
-21 silly git-describe.sync "v1.0.1-4-g0878522" => {"lastTagName":"v1.0.1","lastVersion":"v1.0.1","refCount":"4","sha":"0878522","isDirty":false}
-22 info Looking for changed packages since v1.0.1
+21 silly git-describe.sync "v1.0.0-alpha.4-2-gab256d7" => {"lastTagName":"v1.0.0-alpha.4","lastVersion":"v1.0.0-alpha.4","refCount":"2","sha":"ab256d7","isDirty":false}
+22 info Looking for changed packages since v1.0.0-alpha.4
 23 silly checking diff packages/machine
 24 silly found diff in packages/machine/package.json
 25 verbose filtered diff [ 'packages/machine/package.json' ]
 26 verbose updated @lexer-state/machine
-27 verbose git-describe undefined => "v1.0.1-4-g0878522"
-28 silly git-describe parsed => {"lastTagName":"v1.0.1","lastVersion":"v1.0.1","refCount":"4","sha":"0878522","isDirty":false}
+27 verbose git-describe undefined => "v1.0.0-alpha.4-2-gab256d7"
+28 silly git-describe parsed => {"lastTagName":"v1.0.0-alpha.4","lastVersion":"v1.0.0-alpha.4","refCount":"2","sha":"ab256d7","isDirty":false}
 29 info execute Skipping releases
 30 silly lifecycle No script for "preversion" in "lexer-state", continuing
 31 silly lifecycle No script for "preversion" in "@lexer-state/machine", continuing
@@ -40,10 +40,10 @@
 34 verbose version Detected yarn version 1.22.19
 35 silly lifecycle No script for "version" in "lexer-state", continuing
 36 silly gitAdd [ 'packages/machine/package.json', 'lerna.json' ]
-37 silly gitCommit v1.0.0-alpha.4
-38 verbose git [ 'commit', '-m', 'v1.0.0-alpha.4' ]
-39 silly gitTag v1.0.0-alpha.4 git tag %s -m %s
-40 verbose git [ 'tag', 'v1.0.0-alpha.4', '-m', 'v1.0.0-alpha.4' ]
+37 silly gitCommit v1.0.2
+38 verbose git [ 'commit', '-m', 'v1.0.2' ]
+39 silly gitTag v1.0.2 git tag %s -m %s
+40 verbose git [ 'tag', 'v1.0.2', '-m', 'v1.0.2' ]
 41 silly lifecycle No script for "postversion" in "@lexer-state/machine", continuing
 42 silly lifecycle No script for "postversion" in "lexer-state", continuing
 43 info git Pushing tags...
@@ -53,7 +53,7 @@
 46 warn ENOLICENSE One way to fix this is to add a LICENSE.md file to the root of this repository.
 46 warn ENOLICENSE See https://choosealicense.com for additional guidance.
 47 silly getCurrentSHA
-48 verbose getCurrentSHA 0811339e1d2e5f7994b8d9d432e5e98651555a4a
+48 verbose getCurrentSHA 16914a4966162a77729107ca5433dba0e5daa590
 49 silly lifecycle No script for "prepublish" in "lexer-state", continuing
 50 silly lifecycle No script for "prepare" in "lexer-state", continuing
 51 silly lifecycle No script for "prepublishOnly" in "lexer-state", continuing
