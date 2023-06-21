@@ -38,7 +38,7 @@ export class Machine<
   next(inputValue: S): ILexem['tokenClass'] {
     const [, nextState, callback] = this.transition.table[
       this.currentState
-    ].find(([regex]) => regex.test(inputValue)) || [];
+    ]?.find(([regex]) => regex.test(inputValue)) || [];
     if (!nextState) return this.currentState;
     this.currentState = nextState;
     if (callback) {
@@ -51,7 +51,7 @@ export class Machine<
   nextIfDefine(inputValue: S): ILexem['tokenClass'] {
     const [, nextState, callback] = this.transition.table[
       this.currentState
-    ].find(([regex]) => regex.test(inputValue)) || [];
+    ]?.find(([regex]) => regex.test(inputValue)) || [];
     if (!nextState) throw new StateError();
     this.currentState = nextState;
     if (callback) {
