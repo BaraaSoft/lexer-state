@@ -14,6 +14,7 @@ export interface IMachine<
   currentState: ILexem['tokenClass'];
   at(start: ILexem['tokenClass']): IMachine<E, S, T>;
   save(data: E): IMachine<E, S, T>;
+  nextIfDefine(inputValue: S): ILexem['tokenClass'];
 }
 
 export class Machine<
@@ -37,7 +38,20 @@ export class Machine<
   next(inputValue: S): ILexem['tokenClass'] {
     const [, nextState, callback] = this.transition.table[
       this.currentState
-    ].find(([regex]) => regex.test(inputValue));
+    ].find(([regex]) => regex.test(inputValue)) || [];
+    if (!nextState) return this.currentState;
+    this.currentState = nextState;
+    if (callback) {
+      callback?.call(null, nextState);
+    }
+
+    return nextState;
+  }
+
+  nextIfDefine(inputValue: S): ILexem['tokenClass'] {
+    const [, nextState, callback] = this.transition.table[
+      this.currentState
+    ].find(([regex]) => regex.test(inputValue)) || [];
     if (!nextState) throw new StateError();
     this.currentState = nextState;
     if (callback) {
