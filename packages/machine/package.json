@@ -14,7 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "yarn tsc --watch --preserveWatchOutput",
     "start": "node ./dist/test.js",
-    "build": "yarn run tsc && yarn build:copy",
+    "build": "yarn run tsc",
     "build:copy": "cp -r dist ../examples/relay-demo/lexer-state/",
     "build:watch": "yarn run tsc --watch"
   },
