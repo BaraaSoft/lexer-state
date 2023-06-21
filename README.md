@@ -28,7 +28,8 @@ State machine or finite Automata has a finite set of states edges lead from one 
 
 
 ## Example
-let's create simple state machine that accept and print <if> when it received if chars. 
+let's create a simple state machine that accept and identify (if) in a string. 
+
 ```javascript
 import {
   LexerState,
