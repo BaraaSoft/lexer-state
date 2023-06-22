@@ -23,7 +23,11 @@ We can describe a finite state machine that accept (identify) real numbers in th
 
 ## Example
 
-let's create a simple state machine that accept or identify (if) in a string.
+Let's create a simple state machine that accept or identify (if) in a string.
+such a state machine can be represent in this diagram.
+![App Screenshot](https://private-user-images.githubusercontent.com/36194509/247924494-a2323ad8-c11e-449e-abba-113d0cf2a7bb.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJrZXkxIiwiZXhwIjoxNjg3NDM1NjkzLCJuYmYiOjE2ODc0MzUzOTMsInBhdGgiOiIvMzYxOTQ1MDkvMjQ3OTI0NDk0LWEyMzIzYWQ4LWMxMWUtNDQ5ZS1hYmJhLTExM2QwY2YyYTdiYi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMwNjIyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMDYyMlQxMjAzMTNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zZTZkZjg0MzEwY2YxMzA2MWE4YzVmNmVlNDBjYzQ1OGQ5YjM1ZjcxMTU5MGUwY2NjMTIyNWQ2MjhiMTNjYjZmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.DujbjCncugGBgZpLU5jus17aOqhydHHjmsqqxYehQR8)
+
+We can implements that easily using Lexer-state by first defining our set of states and the transition events. Then create a transition table. After which we create an instance of machine from a transition table. to drive the state machine to goto next state we call next() with input value.
 
 ```javascript
 import {
@@ -45,17 +49,17 @@ const myEvents = {
   space_event: ' ',
 } as const;
 
-// create transition events
+// creating transition events
 const receiveI = LexerState(myEvents).create('i_event');
 const receiveF = LexerState(myEvents).create('f_event');
 const receiveSpace = LexerState(myEvents).create('space_event');
 
-// create States
+// creating set of states
 const firstState = LexerState(myStates).create('firstState');
 const secondState = LexerState(myStates).create('secondState');
 const ifState = LexerState(myStates).create('ifState');
 
-// define transition table
+// defining transition table
 const transition = new Transition('simple');
 transition
   .at(firstState)
@@ -76,6 +80,7 @@ const machine = new Machine(transition).at(
   myStates.firstState,
 );
 
+// call next() with input value to goto next state
 console.log('current state ', machine.next('i'));
 //output: current state  secondState
 
