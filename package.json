@@ -1,6 +1,6 @@
 {
   "name": "lexer-state",
-  "description": "light weight state machine library written in typescript.",
+  "description": "Lightweight state machine library to define and manage state transition declaratively",
   "version": "1.0.0-alpha.9",
   "main": "index.ts",
   "author": "Baraa Abuzaid",
@@ -16,5 +16,15 @@
   ],
   "devDependencies": {
     "lerna": "^7.0.0"
-  }
+  },
+  "keywords": [
+    "state machine",
+    "finite state machine",
+    "finite automata",
+    "state management",
+    "DFA",
+    "lexer",
+    "state",
+    "declarative state machine"
+  ]
 }
