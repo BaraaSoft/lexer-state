@@ -1,7 +1,5 @@
-![lexerState](http://baraabytes.com/wp-content/uploads/lexerState.png)
-
-# Lexer State
-
+![logo](http://baraabytes.com/wp-content/uploads/lexerState.png)
+# 
 Lexer state is a lightweight easy to use state management library, that’s allow you to handle and model your state transition declaratively using a state machine.
 
 ## Installation
