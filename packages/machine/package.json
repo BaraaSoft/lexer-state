@@ -1,6 +1,6 @@
 {
   "name": "@lexer-state/machine",
-  "version": "1.0.3",
+  "version": "1.0.1-alpha.2",
   "description": "light weight state machine library written in typescript",
   "author": "Baraa Abuzaid",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "yarn tsc --watch --preserveWatchOutput",
     "start": "node ./dist/test.js",
-    "build": "yarn run tsc && yarn build:copy",
+    "build": "yarn run tsc",
     "build:copy": "cp -r dist ../examples/relay-demo/lexer-state/",
     "build:watch": "yarn run tsc --watch"
   },
