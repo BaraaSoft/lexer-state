@@ -9,7 +9,8 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "composite": false,
-    "incremental": false
+    "incremental": false,
+    "jsx": "react-jsx"
   },
   "include": ["src"] // which files to compile,
 }
