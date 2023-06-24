@@ -1,12 +1,6 @@
-import {
-  useState,
-  useContext,
-  createContext,
-  Fragment,
-} from 'react';
+import { useState, useContext, createContext } from 'react';
 import { IMachine } from '../machine';
 
-// Todo: use context
 export const useLexerStateBase = <
   Events,
   T extends IMachine<any, any, any> = any,
@@ -42,7 +36,7 @@ export type ILexerStateContext<
 ];
 
 const LexerStateContext = createContext<ILexerStateContext>(
-  [undefined, () => null],
+  [{ currentState: null }, () => null],
 );
 
 export const LexerStateProvider = <
@@ -59,13 +53,11 @@ export const LexerStateProvider = <
   const { currentState, dispatchEvent } =
     useLexerStateBase<Events>(machine);
   return (
-    <Fragment>
-      <LexerStateContext.Provider
-        value={[currentState as States, dispatchEvent]}
-      >
-        {children}
-      </LexerStateContext.Provider>
-    </Fragment>
+    <LexerStateContext.Provider
+      value={[currentState as States, dispatchEvent]}
+    >
+      {children}
+    </LexerStateContext.Provider>
   );
 };
 

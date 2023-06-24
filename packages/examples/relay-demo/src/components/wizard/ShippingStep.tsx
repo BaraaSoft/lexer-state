@@ -1,43 +1,59 @@
-import * as React from "react";
-import { useState } from "react";
-import { Step, Card, Form, Container, Button } from "semantic-ui-react";
-import { OrderState, OrderEvent, OrderMachineType } from "../../service";
+import { useLexerState } from '@lexer-state/machine/dist';
+import * as React from 'react';
+import { useState } from 'react';
+import {
+  Step,
+  Card,
+  Form,
+  Container,
+  Button,
+} from 'semantic-ui-react';
+import {
+  OrderState,
+  OrderEvent,
+  OrderMachineType,
+} from '../../service';
 
 interface ShippingStepProps {
   state: string;
 }
 
-export const ShippingStep = ({ state }: ShippingStepProps): JSX.Element => {
+export const ShippingStep = ({
+  state,
+}: ShippingStepProps): JSX.Element => {
   return (
-    <Step completed={state.at(3) == "1"} active={state.at(2) == "1"}>
+    <Step
+      completed={state.at(3) == '1'}
+      active={state.at(2) == '1'}
+    >
       <Step.Content>
         <Step.Title>Shipping</Step.Title>
-        <Step.Description>Choose your shipping options</Step.Description>
+        <Step.Description>
+          Choose your shipping options
+        </Step.Description>
       </Step.Content>
     </Step>
   );
 };
 
 export const ShippingStepContent = ({
-  state,
-  dispatch,
   orderMahine,
 }: {
-  state: string;
-  dispatch(e: keyof typeof OrderEvent): void;
   orderMahine: OrderMachineType;
 }): JSX.Element => {
+  const { currentState, dispatchEvent } =
+    useLexerState<typeof OrderEvent>();
   const [info, setInfo] = useState({});
 
   const onNext = () => {
     orderMahine.save(info);
-    dispatch(OrderEvent.Done);
+    dispatchEvent(OrderEvent.Done);
   };
   const onPrev = () => {
     orderMahine.save(info);
-    dispatch(OrderEvent.Back);
+    dispatchEvent(OrderEvent.Back);
   };
-  if (state != OrderState.ShippingState) return null;
+  if (currentState != OrderState.ShippingState) return null;
   return (
     <>
       <Card fluid>

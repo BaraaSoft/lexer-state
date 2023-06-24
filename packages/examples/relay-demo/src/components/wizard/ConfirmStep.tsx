@@ -1,14 +1,25 @@
-import * as React from "react";
-import { useState } from "react";
-import { Step, Card, Item, Container, Button } from "semantic-ui-react";
-import { graphql } from "relay-runtime";
-import { useLazyLoadQuery } from "react-relay";
-import * as _ from "lodash";
+import * as React from 'react';
+import { useState } from 'react';
+import {
+  Step,
+  Card,
+  Item,
+  Container,
+  Button,
+} from 'semantic-ui-react';
+import { graphql } from 'relay-runtime';
+import { useLazyLoadQuery } from 'react-relay';
+import * as _ from 'lodash';
 import {
   ConfirmStepQuery as ConfirmStepQueryType,
   ConfirmStepQuery$data as ConfirmStepDataType,
-} from "./__generated__/ConfirmStepQuery.graphql";
-import { OrderState, OrderEvent, OrderMachineType } from "../../service/index";
+} from './__generated__/ConfirmStepQuery.graphql';
+import {
+  OrderState,
+  OrderEvent,
+  OrderMachineType,
+} from '../../service/index';
+import { useLexerState } from '@lexer-state/machine/dist';
 const ConfirmStepQuery = graphql`
   query ConfirmStepQuery {
     machine {
@@ -24,14 +35,20 @@ const ConfirmStepQuery = graphql`
   }
 `;
 
-type OrderType = ConfirmStepDataType["machine"]["orders"][number];
+type OrderType =
+  ConfirmStepDataType['machine']['orders'][number];
 
 interface ConfirmStepProps {
   state: string;
 }
-export const ConfirmStep = ({ state }: ConfirmStepProps): JSX.Element => {
+export const ConfirmStep = ({
+  state,
+}: ConfirmStepProps): JSX.Element => {
   return (
-    <Step completed={state.at(3) == "1"} active={state.at(3) == "1"}>
+    <Step
+      completed={state.at(3) == '1'}
+      active={state.at(3) == '1'}
+    >
       <Step.Content>
         <Step.Title>Confirm Order</Step.Title>
         <Step.Content>Thanks for your order</Step.Content>
@@ -41,25 +58,28 @@ export const ConfirmStep = ({ state }: ConfirmStepProps): JSX.Element => {
 };
 
 export const ConfirmStepContent = ({
-  state,
-  dispatch,
   orderMahine,
 }: {
-  state: string;
-  dispatch(e: keyof typeof OrderEvent): void;
   orderMahine: OrderMachineType;
 }): JSX.Element => {
   const emptyOrder = {
-    id: "",
-    firstname: "",
-    lastname: "",
-    paymentMethod: "",
-    shippingAddress: "",
-    billingAddress: "",
+    id: '',
+    firstname: '',
+    lastname: '',
+    paymentMethod: '',
+    shippingAddress: '',
+    billingAddress: '',
   };
-  if (state != OrderState.ConfirmationState) return null;
-  const data = useLazyLoadQuery<ConfirmStepQueryType>(ConfirmStepQuery, {});
-  const orders = data.machine.orders ? data.machine.orders : [emptyOrder];
+
+  const { currentState, dispatchEvent } =
+    useLexerState<typeof OrderEvent>();
+  const data = useLazyLoadQuery<ConfirmStepQueryType>(
+    ConfirmStepQuery,
+    {},
+  );
+  const orders = data.machine.orders
+    ? data.machine.orders
+    : [emptyOrder];
 
   const order = orders.reduce((prev, curr) => {
     return {
@@ -69,11 +89,14 @@ export const ConfirmStepContent = ({
   }, {}) as OrderType;
 
   const onNext = () => {
-    dispatch(OrderEvent.Done);
+    dispatchEvent(OrderEvent.Done);
   };
   const onPrev = () => {
-    dispatch(OrderEvent.Back);
+    dispatchEvent(OrderEvent.Back);
   };
+
+  if (currentState != OrderState.ConfirmationState)
+    return null;
 
   return (
     <>
@@ -87,13 +110,21 @@ export const ConfirmStepContent = ({
               <div>
                 <Item>
                   <Item.Content>
-                    <Item.Header as={"h4"}>First name</Item.Header>
-                    <Item.Description content={order?.firstname} />
+                    <Item.Header as={'h4'}>
+                      First name
+                    </Item.Header>
+                    <Item.Description
+                      content={order?.firstname}
+                    />
                   </Item.Content>
                   <Item.Content>
                     <div>
-                      <Item.Header as={"h4"}>Last name</Item.Header>
-                      <Item.Description content={order?.lastname} />
+                      <Item.Header as={'h4'}>
+                        Last name
+                      </Item.Header>
+                      <Item.Description
+                        content={order?.lastname}
+                      />
                     </div>
                   </Item.Content>
                 </Item>
@@ -101,16 +132,28 @@ export const ConfirmStepContent = ({
               <div>
                 <Item>
                   <Item.Content>
-                    <Item.Header as={"h4"}>Payment method</Item.Header>
-                    <Item.Description content={order?.paymentMethod} />
+                    <Item.Header as={'h4'}>
+                      Payment method
+                    </Item.Header>
+                    <Item.Description
+                      content={order?.paymentMethod}
+                    />
                   </Item.Content>
                   <Item.Content>
-                    <Item.Header as={"h4"}>Shipping address</Item.Header>
-                    <Item.Description content={order?.shippingAddress} />
+                    <Item.Header as={'h4'}>
+                      Shipping address
+                    </Item.Header>
+                    <Item.Description
+                      content={order?.shippingAddress}
+                    />
                   </Item.Content>
                   <Item.Content>
-                    <Item.Header as={"h4"}>Billing address</Item.Header>
-                    <Item.Description content={order?.billingAddress} />
+                    <Item.Header as={'h4'}>
+                      Billing address
+                    </Item.Header>
+                    <Item.Description
+                      content={order?.billingAddress}
+                    />
                   </Item.Content>
                 </Item>
               </div>

@@ -1,47 +1,59 @@
-import * as React from "react";
-import { useState } from "react";
-import { Step, Card, Form, Container, Button } from "semantic-ui-react";
-import { graphql } from "relay-runtime";
-import { useLazyLoadQuery } from "react-relay";
+import * as React from 'react';
+import { useState } from 'react';
+import {
+  Step,
+  Card,
+  Form,
+  Container,
+  Button,
+} from 'semantic-ui-react';
+import { graphql } from 'relay-runtime';
+import { useLazyLoadQuery } from 'react-relay';
 import {
   OrderEvent,
   ordersMachine,
   OrderState,
   OrderMachineType,
-} from "../../service/index";
+} from '../../service/index';
+import { useLexerState } from '@lexer-state/machine/dist';
 
 interface BillingStepProps {
   state: string;
 }
-export const BillingStep = ({ state }: BillingStepProps): JSX.Element => {
+export const BillingStep = ({
+  state,
+}: BillingStepProps): JSX.Element => {
   return (
-    <Step completed={state.at(2) == "1"} active={state.at(1) == "1"}>
+    <Step
+      completed={state.at(2) == '1'}
+      active={state.at(1) == '1'}
+    >
       <Step.Content>
         <Step.Title>Billing</Step.Title>
-        <Step.Description>Enter billing information</Step.Description>
+        <Step.Description>
+          Enter billing information
+        </Step.Description>
       </Step.Content>
     </Step>
   );
 };
 
 export const BillingStepContent = ({
-  state,
   orderMahine,
-  dispatch,
 }: {
-  state: string;
-  dispatch(e: keyof typeof OrderEvent): void;
   orderMahine: OrderMachineType;
 }): JSX.Element => {
   const [info, setInfo] = useState({});
-  if (state != OrderState.BillingState) return null;
+  const { currentState, dispatchEvent } =
+    useLexerState<typeof OrderEvent>();
+  if (currentState != OrderState.BillingState) return null;
   const onNext = () => {
     ordersMachine.save(info);
-    dispatch(OrderEvent.Done);
+    dispatchEvent(OrderEvent.Done);
   };
   const onPrev = () => {
     ordersMachine.save(info);
-    dispatch(OrderEvent.Back);
+    dispatchEvent(OrderEvent.Back);
   };
 
   return (
@@ -78,14 +90,14 @@ export const BillingStepContent = ({
                   selection
                   options={[
                     {
-                      key: "Credit Card",
-                      text: "Credit Card",
-                      value: "Credit Card",
+                      key: 'Credit Card',
+                      text: 'Credit Card',
+                      value: 'Credit Card',
                     },
                     {
-                      key: "Bank Transfer",
-                      text: "Bank Transfer",
-                      value: "Bank Transfer",
+                      key: 'Bank Transfer',
+                      text: 'Bank Transfer',
+                      value: 'Bank Transfer',
                     },
                   ]}
                 />

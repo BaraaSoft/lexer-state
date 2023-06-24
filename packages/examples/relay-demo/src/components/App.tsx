@@ -1,7 +1,7 @@
-import * as React from "react";
-import RelayEnvironment from "../relay/RelayEnvironment";
-import LoadingSpinner from "./LoadingSpinner";
-import { Container, Header } from "semantic-ui-react";
+import * as React from 'react';
+import RelayEnvironment from '../relay/RelayEnvironment';
+import LoadingSpinner from './LoadingSpinner';
+import { Container, Header } from 'semantic-ui-react';
 import {
   BillingStep,
   ShippingStep,
@@ -12,20 +12,22 @@ import {
   BillingStepContent,
   ShippingStepContent,
   ConfirmStepContent,
-} from "./wizard";
+} from './wizard';
 
-import { ordersMachine, OrderEvent } from "../service";
+import { ordersMachine, OrderEvent } from '../service';
 
-import { useLexerState } from "@lexer-state/machine";
+import { useLexerState } from '@lexer-state/machine/dist';
 export default function App(): React.ReactElement {
   const { currentState, dispatchEvent } =
-    useLexerState<typeof OrderEvent>(ordersMachine);
+    useLexerState<typeof OrderEvent>();
 
   return (
     <RelayEnvironment>
       <React.Suspense fallback={<LoadingSpinner />}>
         <Container className="app" textAlign="center">
-          <Header as="h1">Rethinking UI State Machine</Header>
+          <Header as="h1">
+            Rethinking UI State Machine
+          </Header>
           <GroupContainer>
             <PersonalStep state={currentState} />
             <BillingStep state={currentState} />
@@ -33,27 +35,18 @@ export default function App(): React.ReactElement {
             <ConfirmStep state={currentState} />
           </GroupContainer>
         </Container>
-        <Container className="app margin-xl" textAlign="center">
+        <Container
+          className="app margin-xl"
+          textAlign="center"
+        >
           <PersonalStepContent
-            state={currentState}
             orderMahine={ordersMachine}
-            dispatch={dispatchEvent}
           />
-          <BillingStepContent
-            orderMahine={ordersMachine}
-            state={currentState}
-            dispatch={dispatchEvent}
-          />
+          <BillingStepContent orderMahine={ordersMachine} />
           <ShippingStepContent
             orderMahine={ordersMachine}
-            dispatch={dispatchEvent}
-            state={currentState}
           />
-          <ConfirmStepContent
-            state={currentState}
-            orderMahine={ordersMachine}
-            dispatch={dispatchEvent}
-          />
+          <ConfirmStepContent orderMahine={ordersMachine} />
         </Container>
       </React.Suspense>
     </RelayEnvironment>

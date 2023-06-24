@@ -1,43 +1,59 @@
-import * as React from "react";
-import { useState } from "react";
-import { Step, Card, Form, Container, Button } from "semantic-ui-react";
-import { OrderMachineType, OrderState, OrderEvent } from "../../service";
+import * as React from 'react';
+import { useState } from 'react';
+import {
+  Step,
+  Card,
+  Form,
+  Container,
+  Button,
+} from 'semantic-ui-react';
+import {
+  OrderMachineType,
+  OrderState,
+  OrderEvent,
+} from '../../service';
+import { useLexerState } from '@lexer-state/machine/dist';
 
 interface PersonalStepProps {
   state: string;
 }
 
-export const PersonalStep = ({ state }: PersonalStepProps): JSX.Element => {
+export const PersonalStep = ({
+  state,
+}: PersonalStepProps): JSX.Element => {
   return (
-    <Step completed={state.at(1) == "1"} active={state.at(0) == "1"}>
+    <Step
+      completed={state.at(1) == '1'}
+      active={state.at(0) == '1'}
+    >
       <Step.Content>
         <Step.Title>Personal</Step.Title>
-        <Step.Description>Enter your personal details</Step.Description>
+        <Step.Description>
+          Enter your personal details
+        </Step.Description>
       </Step.Content>
     </Step>
   );
 };
 
 export const PersonalStepContent = ({
-  state,
-  dispatch,
   orderMahine,
 }: {
-  state: string;
-  dispatch(e: keyof typeof OrderEvent): void;
   orderMahine: OrderMachineType;
 }): JSX.Element => {
   const [info, setInfo] = useState({});
+  const { currentState, dispatchEvent } =
+    useLexerState<typeof OrderEvent>();
 
   const onNext = () => {
     orderMahine.save(info);
-    dispatch(OrderEvent.Done);
+    dispatchEvent(OrderEvent.Done);
   };
   const onPrev = () => {
     orderMahine.save(info);
-    dispatch(OrderEvent.Back);
+    dispatchEvent(OrderEvent.Back);
   };
-  if (state != OrderState.PersonalState) return null;
+  if (currentState != OrderState.PersonalState) return null;
 
   return (
     <>
@@ -51,7 +67,10 @@ export const PersonalStepContent = ({
               <Form.Group widths="equal">
                 <Form.Input
                   onChange={(e) =>
-                    setInfo((data) => ({ ...data, firstname: e.target.value }))
+                    setInfo((data) => ({
+                      ...data,
+                      firstname: e.target.value,
+                    }))
                   }
                   fluid
                   label="First name"
@@ -59,7 +78,10 @@ export const PersonalStepContent = ({
                 />
                 <Form.Input
                   onChange={(e) =>
-                    setInfo((data) => ({ ...data, lastname: e.target.value }))
+                    setInfo((data) => ({
+                      ...data,
+                      lastname: e.target.value,
+                    }))
                   }
                   fluid
                   label="Last name"
