@@ -23,9 +23,14 @@
     "@types/relay-runtime": "^14.1.5",
     "relay-compiler": "^15.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.3",
+    "graphql": "^16.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-relay": "^14.1.0",
+    "relay-runtime": "^14.1.0"
   },
-  "dependencies": {
+  "peerDependencies": {
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
