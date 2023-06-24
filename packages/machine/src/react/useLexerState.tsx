@@ -7,7 +7,7 @@ import {
 import { IMachine } from '../machine';
 
 // Todo: use context
-export const useLexerState = <
+export const useLexerStateBase = <
   Events,
   T extends IMachine<any, any, any> = any,
 >(
@@ -46,8 +46,8 @@ const LexerStateContext = createContext<ILexerStateContext>(
 );
 
 export const LexerStateProvider = <
-  ILexerStateEvents,
-  ILexerStateStates = any,
+  Events = any,
+  States = any,
   T extends IMachine<any, any, any> = any,
 >({
   children,
@@ -57,14 +57,11 @@ export const LexerStateProvider = <
   machine: T;
 }) => {
   const { currentState, dispatchEvent } =
-    useLexerState<ILexerStateEvents>(machine);
+    useLexerStateBase<Events>(machine);
   return (
     <Fragment>
       <LexerStateContext.Provider
-        value={[
-          currentState as ILexerStateStates,
-          dispatchEvent,
-        ]}
+        value={[currentState as States, dispatchEvent]}
       >
         {children}
       </LexerStateContext.Provider>
@@ -72,13 +69,15 @@ export const LexerStateProvider = <
   );
 };
 
-/*
- <>
-      <LexerStateContext.Provider
-        value={[currentState, dispatchEvent]}
-      >
-        {children}
-      </LexerStateContext.Provider>
-    </>
+export const useLexerState = <Events, States = any>() => {
+  const [currentState, dispatchEvent] = useContext(
+    LexerStateContext,
+  );
 
-    */
+  return {
+    currentState: currentState as States,
+    dispatchEvent: dispatchEvent as (
+      e: Events[keyof Events],
+    ) => void,
+  };
+};
