@@ -1,5 +1,7 @@
 ![logo](http://baraabytes.com/wp-content/uploads/lexerState.png)
-# 
+
+#
+
 Lexer state is a lightweight easy to use state management library, that’s allow you to handle and model your state transition declaratively using a state machine.
 
 ## Installation
@@ -15,7 +17,7 @@ Install lexer state with npm
 
 State machine or finite Automata has a finite set of states edges lead from one state to another, and each edge is labeled with a symbol. One state is the start state, and certain of the states are distinguished as final states.
 
-## Real Numbers Automata
+### Real Numbers Automata
 
 We can describe a finite state machine that accept (identify) real numbers in the following diagram. Each circle represent a state in the machine, and the arrows are showing the type of input that’ll trigger a transition to the next state.
 
