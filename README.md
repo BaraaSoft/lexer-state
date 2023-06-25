@@ -95,3 +95,132 @@ console.log('current state: ', machine.next('f'));
 //output: current state:  if
 
 ```
+
+## Using Lexer State with React
+
+- create state and event object
+
+```javascript
+export const TrafficLightStates = {
+  redState: 'redState',
+  yellowState: 'yellowState',
+  greenState: 'greenState',
+} as const;
+
+export const TrafficLightEvent = {
+  next_event: 'next_event',
+} as const;
+```
+
+- Instantiate lexerState states and events
+
+```javascript
+// src/service/index.ts
+
+import {
+  LexerState,
+  Transition,
+  isItMatch,
+  Machine,
+} from 'lexer-state/packages/machine';
+
+// Instantiate States & events
+const redState = LexerState(TrafficLightStates).create(
+  'redState',
+);
+const yellowState = LexerState(TrafficLightStates).create(
+  'yellowState',
+);
+const greenState = LexerState(TrafficLightStates).create(
+  'greenState',
+);
+
+// Instantiate transition events
+const nextEvent = LexerState(TrafficLightEvent).create(
+  'next_event',
+);
+```
+
+- Define all possible transitions associated with each state.
+- do() allows you to execute some actions on certain transition
+
+```javascript
+// src/service/index.ts
+
+// Define transitions
+const transition = new Transition('trafficLights');
+transition
+  // defining red state
+  .at(redState)
+  // add red transition conditions
+  .add(isItMatch(nextEvent).moveTo(yellowState))
+  // defining yellow state
+  .at(yellowState)
+  .add(
+    isItMatch(nextEvent)
+      .moveTo(greenState)
+      .do(async (arg) =>
+        console.log(
+          'Traffic light switching to grean go now!',
+        ),
+      ),
+  )
+  // defining green state
+  .at(greenState)
+  .add(isItMatch(nextEvent).moveTo(redState));
+```
+
+- Create traffic lights machine
+
+```javascript
+// src/service/index.ts
+export const trafficMachine = new Machine(transition).at(
+  // set the starting state of the machine
+  TrafficLightStates.redState,
+);
+```
+
+- Setup traffic light state machine with LexerState provider
+
+```javascript
+// src/index.tsx
+import { LexerStateProvider } from 'lexer-state/packages/machine';
+import { trafficMachine } from './service';
+
+function Index() {
+  return (
+    <LexerStateProvider machine={trafficMachine}>
+      <App />
+    </LexerStateProvider>
+  );
+}
+
+const root = ReactDOM.createRoot(
+  document.getElementById('app'),
+);
+root.render(<Index />);
+```
+
+- useLexerState hook to get the current state or to transition to next state by dispatching a transition event to the state machine.
+
+```javascript
+// src/App.tsx
+import { useLexerState } from 'lexer-state/packages/machine';
+import { TrafficLightEvent } from './service.ts';
+
+function App() {
+  const { currentState, dispatchEvent } =
+    useLexerState<typeof TrafficLightEvent>();
+
+  const onNext = () => {
+    dispatchEvent(TrafficLightEvent.next_event);
+  };
+  return (
+    <div>
+      <h1>Traffic light is in {currentState}</h1>
+      <button onClick={onNext}>NEXT</button>
+    </div>
+  );
+}
+
+```
