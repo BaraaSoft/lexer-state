@@ -1,7 +1,7 @@
 {
   "name": "lexer-state",
   "description": "Lightweight state machine library to define and manage state transition declaratively",
-  "version": "1.0.1-alpha.2",
+  "version": "1.0.2",
   "main": "index.ts",
   "author": "Baraa Abuzaid",
   "license": "MIT",
