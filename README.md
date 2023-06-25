@@ -1,4 +1,6 @@
-![logo](http://baraabytes.com/wp-content/uploads/lexerState.png)
+<p align="center">
+  <img src="http://baraabytes.com/wp-content/uploads/lexerState.png" alt="lexer-state logo" height="150" />
+</p>
 
 #
 
@@ -18,6 +20,8 @@ Install lexer state with npm
 State machine or finite Automata has a finite set of states edges lead from one state to another, and each edge is labeled with a symbol. One state is the start state, and certain of the states are distinguished as final states.
 
 ### Real Numbers Automata
+
+#
 
 We can describe a finite state machine that accept (identify) real numbers in the following diagram. Each circle represent a state in the machine, and the arrows are showing the type of input that’ll trigger a transition to the next state.
 
