@@ -158,13 +158,9 @@ transition
   .at(yellowState)
   .add(
     isItMatch(nextEvent)
-      .moveTo(greenState)
-      .do(async (arg) =>
-        console.log(
-          'Traffic light switching to grean go now!',
-        ),
-      ),
-  )
+    .moveTo(greenState)
+      .do(async (arg) =>console.log('Traffic light switching to grean go now!'))
+    )
   // defining green state
   .at(greenState)
   .add(isItMatch(nextEvent).moveTo(redState));
@@ -210,10 +206,7 @@ import { TrafficLightEvent } from './service.ts';
 import { trafficMachine } from './service';
 
 function App() {
-  const { currentState, dispatchEvent } =
-    useLexerState <
-    typeof TrafficLightEvent >
-    trafficMachine;
+  const { currentState, dispatchEvent } = useLexerState<typeof TrafficLightEvent>(trafficMachine);
 
   const onNext = () => {
     dispatchEvent(TrafficLightEvent.next_event);
