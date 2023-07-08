@@ -149,14 +149,12 @@ export const useLexerState = <
   States = any,
   T extends IMachine<any, any, any> = any,
 >(
-  machine?: T,
+  machine: T,
 ) => {
+  if (!machine) throw new LexerStateHookError();
   const [currentState, dispatchEvent] = useContext(
     contextFactory.get(machine),
   );
-
-  if (contextFactory.size() > 1 && !machine)
-    throw new LexerStateHookError();
 
   return {
     currentState: currentState as States,
