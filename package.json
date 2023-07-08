@@ -25,6 +25,7 @@
     "DFA",
     "lexer",
     "state",
-    "declarative state machine"
+    "declarative state machine",
+    "xstate"
   ]
 }
