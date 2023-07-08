@@ -10,7 +10,8 @@
   "scripts": {
     "build": "yarn lerna run build",
     "version:no-private": "yarn lerna version --no-private",
-    "version:force": "yarn lerna version --force-publish"
+    "version:force": "yarn lerna version --force-publish",
+    "publish": "yarn build && yarn publish"
   },
   "workspaces": [
     "packages/machine"
