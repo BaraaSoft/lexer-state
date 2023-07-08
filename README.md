@@ -207,10 +207,13 @@ root.render(<Index />);
 // src/App.tsx
 import { useLexerState } from 'lexer-state/packages/machine';
 import { TrafficLightEvent } from './service.ts';
+import { trafficMachine } from './service';
 
 function App() {
   const { currentState, dispatchEvent } =
-    useLexerState<typeof TrafficLightEvent>();
+    useLexerState <
+    typeof TrafficLightEvent >
+    trafficMachine;
 
   const onNext = () => {
     dispatchEvent(TrafficLightEvent.next_event);
@@ -222,5 +225,4 @@ function App() {
     </div>
   );
 }
-
 ```
