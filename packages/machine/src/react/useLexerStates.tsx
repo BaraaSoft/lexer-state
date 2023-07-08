@@ -5,7 +5,7 @@ import {
   useMemo,
 } from 'react';
 import { IMachine } from '../machine';
-import { compose } from '../util';
+import { ComposedProviders } from '../util';
 
 export const useLexerStateBase = <
   Events,
@@ -121,10 +121,13 @@ export const LexerStateProviders = <
         machine={machine}
       />
     );
-  }, null);
+  });
 
-  const ContextProvider = compose(providers);
-  return <ContextProvider>{children}</ContextProvider>;
+  return (
+    <ComposedProviders providers={providers}>
+      {children}
+    </ComposedProviders>
+  );
 };
 
 export const useLexerStates = <
