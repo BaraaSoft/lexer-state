@@ -4,6 +4,10 @@ import {
   createContext,
   useMemo,
 } from 'react';
+import {
+  LexerStateHookError,
+  MachineNotFoundError,
+} from '../errors';
 import { IMachine } from '../machine';
 import { ComposedProviders } from '../util';
 
@@ -52,6 +56,7 @@ type CreateContextFactoryType<T> = {
   get(
     mahine: T,
   ): React.Context<ILexerStateContext<any, any>>;
+  size(): number;
 };
 
 const createContextFactory = <
@@ -69,6 +74,9 @@ const createContextFactory = <
     },
     get(mahine: T) {
       return map.get(mahine);
+    },
+    size() {
+      return map.size;
     },
   };
 };
@@ -104,24 +112,30 @@ export const LexerStateProviders = <
 >({
   children,
   machines,
+  machine,
 }: {
   children?: React.ReactNode;
-  machines: T[];
+  machines?: T[];
+  machine?: T;
 }) => {
+  if (!machine && !Array.isArray(machines))
+    throw new MachineNotFoundError();
   const factory: CreateContextFactoryType<T> =
     useMemo(() => {
       return contextFactory.create(machines);
     }, [machines]);
 
-  const providers = machines.map((machine) => {
-    const machineContext = factory.get(machine);
-    return (
-      <SingleMahineProvider
-        LexerStateContext={machineContext}
-        machine={machine}
-      />
-    );
-  });
+  const providers = [...machines, machine].map(
+    (machine) => {
+      const machineContext = factory.get(machine);
+      return (
+        <SingleMahineProvider
+          LexerStateContext={machineContext}
+          machine={machine}
+        />
+      );
+    },
+  );
 
   return (
     <ComposedProviders providers={providers}>
@@ -132,14 +146,17 @@ export const LexerStateProviders = <
 
 export const useLexerStates = <
   Events,
-  T extends IMachine<any, any, any> = any,
   States = any,
+  T extends IMachine<any, any, any> = any,
 >(
-  machine: T,
+  machine?: T,
 ) => {
   const [currentState, dispatchEvent] = useContext(
     contextFactory.get(machine),
   );
+
+  if (contextFactory.size() > 1 && !machine)
+    throw new LexerStateHookError();
 
   return {
     currentState: currentState as States,
