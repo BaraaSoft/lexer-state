@@ -111,7 +111,7 @@ export const LexerStateProvider = <
   T extends IMachine<any, any, any> = any,
 >({
   children,
-  machines,
+  machines = [],
   machine,
 }: {
   children?: React.ReactNode;
@@ -120,22 +120,26 @@ export const LexerStateProvider = <
 }) => {
   if (!machine && !Array.isArray(machines))
     throw new MachineNotFoundError();
+
+  const allMachines = useMemo(
+    () => (machine ? [...machines, machine] : machines),
+    [machine, machines],
+  );
+
   const factory: CreateContextFactoryType<T> =
     useMemo(() => {
-      return contextFactory.create(machines);
-    }, [machines]);
+      return contextFactory.create(allMachines);
+    }, [allMachines]);
 
-  const providers = [...machines, machine].map(
-    (machine) => {
-      const machineContext = factory.get(machine);
-      return (
-        <SingleMahineProvider
-          LexerStateContext={machineContext}
-          machine={machine}
-        />
-      );
-    },
-  );
+  const providers = allMachines.map((machine) => {
+    const machineContext = factory.get(machine);
+    return (
+      <SingleMahineProvider
+        LexerStateContext={machineContext}
+        machine={machine}
+      />
+    );
+  });
 
   return (
     <ComposedProviders providers={providers}>
