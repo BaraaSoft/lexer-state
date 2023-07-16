@@ -219,13 +219,13 @@ function App() {
   );
 }
 ```
+### Setup with multiple machines
 ##
-- Setup with multiple machines
 
 ```javascript
 // src/index.tsx
 import { LexerStateProvider } from 'lexer-state/packages/machine';
-import { trafficMachine } from './service';
+import { trafficMachine, simplemMachine } from './service';
 
 function Index() {
   return (
