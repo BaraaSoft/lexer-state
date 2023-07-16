@@ -219,3 +219,24 @@ function App() {
   );
 }
 ```
+##
+- Setup with multiple machines
+
+```javascript
+// src/index.tsx
+import { LexerStateProvider } from 'lexer-state/packages/machine';
+import { trafficMachine } from './service';
+
+function Index() {
+  return (
+    <LexerStateProvider machinse={[trafficMachine,simplemMachine]}>
+      <App />
+    </LexerStateProvider>
+  );
+}
+
+const root = ReactDOM.createRoot(
+  document.getElementById('app'),
+);
+root.render(<Index />);
+```
