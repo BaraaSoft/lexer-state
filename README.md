@@ -219,9 +219,8 @@ function App() {
   );
 }
 ```
-### Setup with multiple machines
+### Setup with multiple state machine
 ##
-
 ```javascript
 // src/index.tsx
 import { LexerStateProvider } from 'lexer-state/packages/machine';
