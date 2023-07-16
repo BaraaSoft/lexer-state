@@ -224,11 +224,11 @@ function App() {
 ```javascript
 // src/index.tsx
 import { LexerStateProvider } from 'lexer-state/packages/machine';
-import { trafficMachine, simplemMachine } from './service';
+import { trafficMachine, simpleMachine } from './service';
 
 function Index() {
   return (
-    <LexerStateProvider machines={[trafficMachine,simplemMachine]}>
+    <LexerStateProvider machines={[trafficMachine,simpleMachine]}>
       <App />
     </LexerStateProvider>
   );
