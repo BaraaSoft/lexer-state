@@ -228,7 +228,7 @@ import { trafficMachine, simplemMachine } from './service';
 
 function Index() {
   return (
-    <LexerStateProvider machinse={[trafficMachine,simplemMachine]}>
+    <LexerStateProvider machines={[trafficMachine,simplemMachine]}>
       <App />
     </LexerStateProvider>
   );
